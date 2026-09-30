@@ -1,0 +1,1 @@
+This is the code used for my final year applied maths project "Quantum Correlations From Mixed Unitary Channels"
