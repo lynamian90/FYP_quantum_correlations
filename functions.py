@@ -66,6 +66,7 @@ def make_channel(U,p):
     return channel
 
 
+#create a random unitary matrix following the method in "Random unitary matrices" K Zyczkowski and M Kus 1994 J.Phys.A:Math.Gen. 27 4235
 def random_unitary(n_qubits: int):
     N = 2**n_qubits #dimension of Hilbert space
 
