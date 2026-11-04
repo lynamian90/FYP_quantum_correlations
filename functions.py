@@ -3,8 +3,7 @@ import numpy as np
 from scipy.optimize import minimize
 from qiskit.quantum_info import DensityMatrix, partial_trace, entropy, Statevector, Kraus, entanglement_of_formation,Operator 
 import matplotlib.pyplot as plt
-# to run:
-# & "c:\Users\lynam\anacondacustom\envs\qiskit\python.exe" functions.py
+
 
 
 def conditional_entropy(params, rho):
@@ -180,3 +179,19 @@ def quantum_discord(rho, d=None, n_starts=8, seed=0):
 
     classical_corr = entropy(rho_B) - best
     return max(mutual_info - classical_corr, 0.0)
+
+
+#makes random unitary channel with n unitaries and random p values
+
+def make_random_channel(n_unitaries:int =2, n_qubits:int = 2, method:str = "QR"):
+    #Sample N unbiased probabilities from a symmetric dirichlet distribution 
+    p_values = np.random.dirichlet(np.ones(n_unitaries))
+
+    #generate N random unitaries
+    kraus_ops = []
+    for i in range(n_unitaries):
+        U = random_unitary(n_qubits, method=method)
+        kraus_ops.append(np.sqrt(p_values[i]) * U)
+
+    return Kraus(kraus_ops)
+
